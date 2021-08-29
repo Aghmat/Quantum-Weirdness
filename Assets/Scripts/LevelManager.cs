@@ -19,9 +19,14 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject[] firstTwoQuarks;
     [SerializeField] private GameObject quarkSpawner;
+    [SerializeField] private GameObject hydrogenSpawner;
     [SerializeField] private GameObject electron;
 
     private bool isRunning;
+    private bool hasSpawned;
+    private bool black;
+    
+    [SerializeField] private GameObject star;
 
     private void OnEnable()
     {
@@ -29,6 +34,10 @@ public class LevelManager : MonoBehaviour
         events.Add("FirstTwoQuarks", false);
         events.Add("Proton", false);
         events.Add("Electron", false);
+        events.Add("Hydrogen", false);
+        
+        hydrogenSpawner.SetActive(false);
+        star.SetActive(false);
     }
 
     void Start()
@@ -71,8 +80,9 @@ public class LevelManager : MonoBehaviour
         //     hasClipPlayed[i] = true;
         // }
         
+        
         PlayAudioClip(3, 5);
-
+        
         if (hasClipPlayed[5] && !events["FirstTwoQuarks"])
         {
             mainCamera.GetComponent<FreeFlyCamera>().ResetCamera();
@@ -91,32 +101,45 @@ public class LevelManager : MonoBehaviour
             PlayAudioClip(2, 6);
         }
         
-        if (events["Proton"])
+        if (events["Proton"] && !events["Electron"])
         {
             PlayAudioClip(2,7);
             quarkSpawner.SetActive(true);
         }
-
-        var containers = GameObject.FindGameObjectsWithTag("Container");
-        if (containers.Length > 0)
+        
+        if (!events["Hydrogen"])
         {
-            foreach (var container in containers)
+            var containers = GameObject.FindGameObjectsWithTag("Container");
+            if (containers.Length > 0)
             {
-                var numberOfUpQuarks = Array.FindAll(container.GetComponentsInChildren<QuarkType>(), q => q.qType.Equals(QuarkType.QType.Up)).Length;
-                if (container.transform.childCount == 3 && numberOfUpQuarks == 2)
+                foreach (var container in containers)
                 {
-                    PlayAudioClip(2, 8);
-
-                    if (events["Electron"])
+                    var numberOfUpQuarks = Array.FindAll(container.GetComponentsInChildren<QuarkType>(), q => q.qType.Equals(QuarkType.QType.Up)).Length;
+                    if (container.transform.childCount == 3 && numberOfUpQuarks == 2)
                     {
-                        GameObject.Instantiate(electron,  new Vector3(6, 3, 0), Quaternion.identity, container.transform);
+                        PlayAudioClip(2, 8);
+            
+                        if (events["Electron"])
+                        {
+                            GameObject.Instantiate(electron,  Vector3.zero, Quaternion.identity, container.transform);
+                        }
+                    }
+            
+                    if (container.transform.childCount == 4)
+                    {
+                        PlayAudioClip(2, 9);
+                        PlayAudioClip(0, 10);
                     }
                 }
-
-                if (container.transform.childCount == 4)
-                {
-                    PlayAudioClip(2, 9);
-                }
+            }
+        }
+        else
+        {
+            PlayAudioClip(0, 11);
+            PlayAudioClip(10, 12);
+            if (!hasSpawned)
+            {
+                StartCoroutine(WaitSpawnHydrogen());
             }
         }
     }
@@ -129,6 +152,42 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    IEnumerator WaitSpawnHydrogen()
+    {
+        hasSpawned = true;
+        yield return new WaitForSeconds(35f);
+        hydrogenSpawner.SetActive(true);
+        
+        quarkSpawner.SetActive(false);
+        var ups = GameObject.FindGameObjectsWithTag("Up");
+        var downs = GameObject.FindGameObjectsWithTag("Down");
+
+        foreach (var up in ups)
+        {
+            if (up.transform.parent != null)
+            {
+                up.transform.parent.gameObject.SetActive(false);
+            }
+            up.SetActive(false);
+        }
+        
+        foreach (var down in downs)
+        {
+            down.SetActive(false);
+        }
+        
+        yield return new WaitForSeconds(10f);
+        var containers = GameObject.FindGameObjectsWithTag("Container");
+
+        foreach (var container in containers)
+        {
+            container.SetActive(false);
+        }
+        
+        star.SetActive(true);
+    }
+        
+        
     IEnumerator WaitAndPlayClip(float seconds, int clipIndex)
     {
         isRunning = true;
@@ -143,7 +202,8 @@ public class LevelManager : MonoBehaviour
             events["Proton"] = true;
         else if (clipIndex == 8)
             events["Electron"] = true;
-        
+        else if (clipIndex == 10)
+            events["Hydrogen"] = true; 
         
         isRunning = false;
     }
