@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [AddComponentMenu("Camera-Control/Mouse Orbit with zoom")]
 public class OrbitCamera : MonoBehaviour
@@ -86,9 +84,9 @@ public class OrbitCamera : MonoBehaviour
     {
         if (Input.GetKeyDown(_initPositonButton) || target == null)
         {
-            target = origin.transform;
+            ResetCamera();
         }
-        
+
         if (!_active)
             return;
 
@@ -120,6 +118,12 @@ public class OrbitCamera : MonoBehaviour
             transform.rotation = rotation;
             transform.position = position;
         }
+    }
+
+    public void ResetCamera()
+    {
+        if (origin != null) 
+            target = origin.transform;
     }
 
     public static float ClampAngle(float angle, float min, float max)

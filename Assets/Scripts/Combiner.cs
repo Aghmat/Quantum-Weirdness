@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class Combiner : MonoBehaviour
@@ -9,7 +6,8 @@ public class Combiner : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private GameObject container;
     public Stack<GameObject> lastClicked;
-    void Start()
+
+    private void OnEnable()
     {
         lastClicked = new Stack<GameObject>();
     }

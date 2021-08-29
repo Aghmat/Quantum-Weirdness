@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchCamera : MonoBehaviour
 {
     private OrbitCamera orbitCamera;
     private FreeFlyCamera flyCamera;
+
+    [SerializeField] private LevelManager levelManager;
     void Start()
     {
         orbitCamera = GetComponent<OrbitCamera>();
@@ -17,7 +17,7 @@ public class SwitchCamera : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && levelManager.HasClipPlayed[3])
         {
             orbitCamera.enabled = !orbitCamera.enabled;
             flyCamera.enabled = !flyCamera.enabled;

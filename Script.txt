@@ -1,0 +1,49 @@
+Welcome to an introductory course on particle physics.
+
+#Intro
+
+Our objective today will be to create a star and you will be my little helper. We'll unveil the basic building blocks of our universe from the nanoscopic to the unfathomably large.
+
+#Tutorial
+
+First lets learn the controls. Pressing the spacebar key enables your mouse, this disables movement, press the right mouse button to regain control.
+
+You can look around the scene with your mouse. You can walk around with the WASD keys on your keyboard. You can ascend and descend with the q and e keys. You can speed up by holding the shift button.
+
+There's an alternative camera mode by pressing the tab key. This is an orbit camera, your mouse orbits the center of the scene and if you right click on an object in the scene you can change the orbit point. You can zoom in and out with the mouse scroll wheel.
+
+You can alternate the cameras at any time by pressing the tab key. Pressing the R key in either mode resets the camera.
+
+#First Level - The Weak force
+
+Lets try making stuff, these are quarks there are 6 types but most matter is made up of 2. The up and down quark. Left click on a quark to combine them
+
+Yeah a combination of those 2 quarks unfortunately does not exist in our universe but what you observed is one of the 4 fundamental forces, the weak nuclear force. 
+Each force is assigned a force carrier particle, the particle that mediates the weak force is the W Boson. The weak force is responsible for particle decay, unstable groupings decay into smaller particles and energy in the form of photons, we'll get to photons later.
+
+#Second Level - The Strong force
+
+Let's try that again, here's a tip, group them in 3's 2 of one kind and 1 of another.
+
+There we go, that's a proton, that exists in our universe, what keeps them stuck together is the strong nuclear foce which is mediated by the gluon. As you guessed the force is strong. 2 fundamental forces down, 2 to go.
+
+#Third Level - Electromagnetism
+
+I'll help you out, make me 10 protons and I'll give you a gift.
+
+Nice, those protons don't like each other since they are all positively charged, I'll change that by adding some spice. The spice in question is this little bugger the electron, what keeps it buzzing around the proton is the electromagnetic force, mediated by photons - light particles.
+Congrats we now have hydrogen, the first element on the periodic table of elements - the most abundant element in the universe.
+
+#Fourth Level Gravity
+
+I'll take over from here, gravity the 4th and final fundamental force. Also known as the weakest force is mediated by the theoritical particle the graviton - it's the ugly duckling among the 4 forces and the least understood. 
+It does not really factor in at this level, what makes these hydrogen atoms stick together to other atoms is still the electromagnetic force. But here's a couple decillion hydrogen atoms.
+
+Oooo, what's that, the weakest force they said, who's the ugly one now? Now I - um I mean gravity is the strongest force out of the bunch, so strong that fusion is taking place where hydrogen atoms fuse into helium, it's so pretty take a moment to stare at what you created.
+
+Let's skip past this boring bit and go forward a couple billion years. What's left over is a black hole, a gravity well so strong that nothing and I mean nothing escapes. 
+
+In the end I always win.
+
+
+

@@ -78,6 +78,8 @@ public class FreeFlyCamera : MonoBehaviour
     [Tooltip("This keypress will move the camera to initialization position")]
     private KeyCode _initPositonButton = KeyCode.R;
 
+    [SerializeField] private LevelManager levelManager;
+
     #endregion UI
 
     private CursorLockMode _wantedMode;
@@ -144,7 +146,7 @@ public class FreeFlyCamera : MonoBehaviour
 
     private void Update()
     {
-        if (!_active)
+        if (!_active || !levelManager.HasClipPlayed[1])
             return;
 
         SetCursorState();
@@ -211,8 +213,13 @@ public class FreeFlyCamera : MonoBehaviour
         // Return to init position
         if (Input.GetKeyDown(_initPositonButton))
         {
-            transform.position = _initPosition;
-            transform.eulerAngles = _initRotation;
+            ResetCamera();
         }
+    }
+
+    public void ResetCamera()
+    {
+        transform.position = _initPosition;
+        transform.eulerAngles = _initRotation;
     }
 }
